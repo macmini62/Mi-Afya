@@ -120,43 +120,45 @@ app.post('/ussd', (req,res)=>{
     }
     else{
         let code = Math.floor(Math.random() * (max - min + 1)) + min;
-        
-        // switch (text) {
-        //     case text === "1*1":
-        //         msg = `Visit Chuka Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;
-        //     case text === "1*2":
-        //         msg = `Visit Embu Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;   
-        //     case text === "1*3":
-        //         msg = `Visit Meru Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;
-        //     case text === "2*1":
-        //         msg = `Visit Chuka Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;
-        //     case text === "2*2":
-        //         msg = `Visit Embu Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;
-        //     case text === "2*3":
-        //         msg = `Visit Meru Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
-        //         isFinished = true;
-        //         break;
-        // }
 
-        isFinished = true;
-        response = `END You'll receive a message with medical guidlines to follow`
+        switch (text) {
+            case "1*1":
+                msg = `Dear Patient visit Chuka Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;
+            case "1*2":
+                msg = `Dear Patient visit Embu Hospital for insulin medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;   
+            case "1*3":
+                msg = `Dear Patient visit Meru Hospital for insulin medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;
+            case "2*1":
+                msg = `Dear Patient visit Chuka Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;
+            case "2*2":
+                msg = `Dear Patient visit Embu Hospital for ARV medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;
+            case "2*3":
+                msg = `Dear Patient visit Meru Hospital for ARV medication and regular checkups produce this code ${code}`;
+                isFinished = true;
+                break;
+            default:
+                // response = `END You'll receive a message with medical guidelines to follow`;
+                msg = `Dear Patient thank you for using our services.To access our medical services please go to this hospital and produce this code ${Math.floor(Math.random() * (max - min + 1)) + min}.PLEASE DON'T SHARE THE CODE.`
+                isFinished = true;
+        }
+       // isFinished = true;
+       response = `END You'll receive a message with medical guidlines to follow`
     }
 
     res.set('Content-Type:text/plain');
     res.send(response); 
 
     if(isFinished){
-        let msg = `Dear Patient thank you for using our services.To access our medical services please go to this hospital and produce this code ${Math.floor(Math.random() * (max - min + 1)) + min}.PLEASE DON'T SHARE THE CODE.`
         res.send(sendMessage(phoneNumber,msg));
     }
     // else if(!isFinished) {
