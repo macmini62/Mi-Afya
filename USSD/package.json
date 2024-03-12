@@ -1,0 +1,18 @@
+{
+  "name": "afya",
+  "version": "1.0.0",
+  "description": "",
+  "main": "indeSMS.js",
+  "scripts": {
+    "test": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "africastalking": "^0.6.6",
+    "express": "^4.18.3",
+    "nodemon": "^3.1.0"
+  }
+}
