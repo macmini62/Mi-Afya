@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const sendMessage = require("../SMS/sendSMS");
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
@@ -8,9 +9,8 @@ app.get('/api/test', (req,res)=>{
     res.send("Testing the requests")
 })
 
-let name = "";
-let age = "";
-let names = [];
+const min = 1000;
+const max = 10000;
 
 // assume this is a databse that a medical facility can access.
 const symptoms = ["Headache","Chestpain","Dehydration","Diarrhoea"];
@@ -21,8 +21,11 @@ const locations = ["Chuka", "Embu", "Meru"];
 app.post('/ussd', (req,res)=>{
     const {sessionId, serviceCode, phoneNumber,text} = req.body;
     let response = "";
+    let isFinished = false;
+    let finished = false;
+    let msg;
     if(text === ""){
-        response = `CON Welcome To MiAfya
+        response = `CON Welcome To Mi-Afya
         Choose A Health Issue:
 
         1:Diabetes
@@ -116,11 +119,49 @@ app.post('/ussd', (req,res)=>{
         }
     }
     else{
-        response = `END You'll receive a message with the nearest medical facility to visit in your area`
+        let code = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        // switch (text) {
+        //     case text === "1*1":
+        //         msg = `Visit Chuka Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;
+        //     case text === "1*2":
+        //         msg = `Visit Embu Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;   
+        //     case text === "1*3":
+        //         msg = `Visit Meru Hospital or St Lucy Hospital for insulin medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;
+        //     case text === "2*1":
+        //         msg = `Visit Chuka Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;
+        //     case text === "2*2":
+        //         msg = `Visit Embu Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;
+        //     case text === "2*3":
+        //         msg = `Visit Meru Hospital or St Lucy Hospital for ARV medication and regular checkups produce this code ${code}`;
+        //         isFinished = true;
+        //         break;
+        // }
+
+        isFinished = true;
+        response = `END You'll receive a message with medical guidlines to follow`
     }
 
     res.set('Content-Type:text/plain');
-    res.send(response);
+    res.send(response); 
+
+    if(isFinished){
+        let msg = `Dear Patient thank you for using our services.To access our medical services please go to this hospital and produce this code ${Math.floor(Math.random() * (max - min + 1)) + min}.PLEASE DON'T SHARE THE CODE.`
+        res.send(sendMessage(phoneNumber,msg));
+    }
+    // else if(!isFinished) {
+    //     res.send(sendMessage(phoneNumber,msg));
+    // }
 })
 
 const PORT = process.env.PORT || 3000;
