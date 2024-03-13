@@ -1,35 +1,10 @@
-// const AfricasTalking = require('africastalking');
 
-// // TODO: Initialize Africa's Talking
-// const africastalking = AfricasTalking({
-//   apiKey: '9e7b5af6ffc3c5fc2356ae3dfa3738e10b51f446db44b82a04e31a8e5785821b', 
-//   username: 'sandbox'
-// });
-
-
-
-// module.exports = async function sendSMS() {
-    
-//     // TODO: Send message
-//     try {
-//   const result=await africastalking.SMS.send({
-//     to: '+254111304379', 
-//     message:'one two, one two api testing'
-//   });
-//   console.log(result);
-// } catch(ex) {
-//   console.error(ex);
-// } 
-
-// };
-// Set your app credentials
 
 //ca980c7cc03327db9cddb10ef4806e0cc555cb5e2765dfe29ff94f146b987b34
+//96f6ca862e98df83f9df0c8e92dfc15ac27ffe0f79fced57de56b43c01e98c1c
 
-
-//4
 const credentials = {
-    apiKey: 'ca980c7cc03327db9cddb10ef4806e0cc555cb5e2765dfe29ff94f146b987b34',
+    apiKey: '96f6ca862e98df83f9df0c8e92dfc15ac27ffe0f79fced57de56b43c01e98c1c',
     username: 'devapp',
 }
 

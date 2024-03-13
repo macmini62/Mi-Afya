@@ -147,12 +147,11 @@ app.post('/ussd', (req,res)=>{
                 isFinished = true;
                 break;
             default:
-                // response = `END You'll receive a message with medical guidelines to follow`;
-                msg = `Dear Patient thank you for using our services.To access our medical services please go to this hospital and produce this code ${Math.floor(Math.random() * (max - min + 1)) + min}.PLEASE DON'T SHARE THE CODE.`
+                msg = `Dear Patient thank you for using our services.To access our medical services please go to this hospital and produce this code ${Math.floor(Math.random() * (max - min + 1)) + min}. PLEASE DON'T SHARE THE CODE.`
                 isFinished = true;
         }
-       // isFinished = true;
-       response = `END You'll receive a message with medical guidlines to follow`
+        response = `END You'll receive a message with medical guidlines to follow`
+    //    isFinished = true;
     }
 
     res.set('Content-Type:text/plain');
